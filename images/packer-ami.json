@@ -8,8 +8,7 @@
     "ami_name": "distributed-jwt-cracker {{timestamp}}",
     "tags": {
       "OS_Version": "Ubuntu",
-      "Release": "Latest",
-      "Base_AMI_Name": "{{ .SourceAMIName }}"
+      "Release": "Latest"
     }
   }],
   "provisioners": [{
