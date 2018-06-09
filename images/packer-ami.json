@@ -11,20 +11,33 @@
       "Release": "Latest"
     }
   }],
-  "provisioners": [{
-    "type": "shell",
-    "inline": [
-      "echo \"deb http://download.opensuse.org/repositories/network:/messaging:/zeromq:/release-stable/Debian_9.0/ ./\" sudo tee --append /etc/apt/sources.list",
-      "wget https://download.opensuse.org/repositories/network:/messaging:/zeromq:/release-stable/Debian_9.0/Release.key -O- | sudo apt-key add",
-      "sudo apt-get update",
-      "sudo apt-get install -y curl wget git build-essential python libzmq3-dev",
-      "curl https://s3.amazonaws.com/aws-cloudwatch/downloads/latest/awslogs-agent-setup.py -O",
-      "sudo python ./awslogs-agent-setup.py --region eu-west-1",
-      "curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -",
-      "sudo apt-get install -y nodejs",
-      "sudo npm i --global --unsafe-perm --verbose distributed-jwt-cracker",
-      "rm .ssh/authorized_keys",
-      "sudo rm /root/.ssh/authorized_keys"
-    ]
-  }]
+  "provisioners": [
+    {
+      "type": "file",
+      "source": "{{template_dir}}/templates/awslogs.conf",
+      "destination": "/tmp/awslogs.conf"
+    },
+    {
+      "type": "shell",
+      "inline": [
+        "echo \"deb http://download.opensuse.org/repositories/network:/messaging:/zeromq:/release-stable/Debian_9.0/ ./\" | sudo tee --append /etc/apt/sources.list",
+        "wget https://download.opensuse.org/repositories/network:/messaging:/zeromq:/release-stable/Debian_9.0/Release.key -O- | sudo apt-key add",
+        "sudo apt-get update",
+        "sudo apt-get install -y curl wget git build-essential python libzmq3-dev ec2-api-tools awscli",
+        "curl https://s3.amazonaws.com/aws-cloudwatch/downloads/latest/awslogs-agent-setup.py -O",
+        "sudo mv /tmp/awslogs.conf /root/awslogs.conf",
+        "sudo mkdir /var/lib/awslogs",
+        "sudo touch /var/lib/awslogs/agent-state",
+        "sudo python ./awslogs-agent-setup.py --region eu-west-1 --non-interactive --configfile=/root/awslogs.conf",
+        "sudo touch /var/log/messages",
+        "sudo chmod 777 /var/log/messages",
+        "sudo service awslogs start",
+        "curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -",
+        "sudo apt-get install -y nodejs",
+        "sudo npm i --global --unsafe-perm --verbose distributed-jwt-cracker",
+        "rm .ssh/authorized_keys",
+        "sudo rm /root/.ssh/authorized_keys"
+      ]
+    }
+  ]
 }

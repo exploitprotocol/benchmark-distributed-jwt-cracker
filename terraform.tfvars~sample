@@ -1,0 +1,9 @@
+stack_name = "length6"
+
+authorized_ssh_key = "<ADD YOUR SSH PUBLIC KEY CONTENT HERE>"
+
+token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE1MjgxOTMyMTV9.APd_dKoyRZggh9jWrUCdRaYwKHB64x8LeQQM1pT9FBc"
+
+alphabet = "abcdefghijklmnopqrstuvwxyz"
+
+ami = "<ADD YOUR AMI HERE>" # build the image using packer
