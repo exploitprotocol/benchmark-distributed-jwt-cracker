@@ -5,13 +5,13 @@ This repository contains the source code used to benchmark [distributed-jwt-crac
 
 ## Current results
 
-| Secret length | Attempts            | Time      |
-| ------------: |:------------------- | ---------:|
-|             5 | 26^5 = **12 mln**   | 1m55.618s |
-|             6 | 26^6 = **310 mln**  | TODO      |
-|             7 | 26^7 = **8 Bln**    | TODO      |
-|             8 | 26^8 = **210 Bln**  | TODO      |
-|             9 | 26^9 = **5.5 Tln**  | TODO      |
+| Secret length | Attempts            | Time              |
+| ------------: |:------------------- | -----------------:|
+|             5 | 26^5 = **12 mln**   | 1m55.618s         |
+|             6 | 26^6 = **310 mln**  | 1h32m48.378s      |
+|             7 | 26^7 = **8 Bln**    | 3d18h22m10.231s   |
+|             8 | 26^8 = **210 Bln**  | TODO              |
+|             9 | 26^9 = **5.5 Tln**  | TODO              |
 
 
 ## The benchmark
